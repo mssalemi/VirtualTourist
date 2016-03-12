@@ -15,6 +15,9 @@
 		4820D0631C93679A0051B283 /* VirtualTourist_1Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4820D0621C93679A0051B283 /* VirtualTourist_1Tests.swift */; };
 		4820D06E1C93679A0051B283 /* VirtualTourist_1UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4820D06D1C93679A0051B283 /* VirtualTourist_1UITests.swift */; };
 		4820D07F1C936FEC0051B283 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4820D07E1C936FEC0051B283 /* Constants.swift */; };
+		488C887D1C93EEBD00126685 /* CoreDataStackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488C887C1C93EEBD00126685 /* CoreDataStackManager.swift */; };
+		488C887F1C93EF2B00126685 /* Pin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488C887E1C93EF2B00126685 /* Pin.swift */; };
+		488C88821C93F0CF00126685 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 488C88801C93F0CF00126685 /* Model.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +52,9 @@
 		4820D06D1C93679A0051B283 /* VirtualTourist_1UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualTourist_1UITests.swift; sourceTree = "<group>"; };
 		4820D06F1C93679A0051B283 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4820D07E1C936FEC0051B283 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		488C887C1C93EEBD00126685 /* CoreDataStackManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStackManager.swift; sourceTree = "<group>"; };
+		488C887E1C93EF2B00126685 /* Pin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pin.swift; sourceTree = "<group>"; };
+		488C88811C93F0CF00126685 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +135,8 @@
 		4820D07B1C9367B10051B283 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				488C88801C93F0CF00126685 /* Model.xcdatamodeld */,
+				488C887E1C93EF2B00126685 /* Pin.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -137,6 +145,7 @@
 			isa = PBXGroup;
 			children = (
 				4820D04F1C93679A0051B283 /* TravelLocationsMapViewController.swift */,
+				488C887C1C93EEBD00126685 /* CoreDataStackManager.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -283,9 +292,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				488C887F1C93EF2B00126685 /* Pin.swift in Sources */,
 				4820D0501C93679A0051B283 /* TravelLocationsMapViewController.swift in Sources */,
+				488C887D1C93EEBD00126685 /* CoreDataStackManager.swift in Sources */,
 				4820D04E1C93679A0051B283 /* AppDelegate.swift in Sources */,
 				4820D07F1C936FEC0051B283 /* Constants.swift in Sources */,
+				488C88821C93F0CF00126685 /* Model.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -510,6 +522,7 @@
 				4820D0741C93679A0051B283 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4820D0751C93679A0051B283 /* Build configuration list for PBXNativeTarget "VirtualTourist_1Tests" */ = {
 			isa = XCConfigurationList;
@@ -518,6 +531,7 @@
 				4820D0771C93679A0051B283 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4820D0781C93679A0051B283 /* Build configuration list for PBXNativeTarget "VirtualTourist_1UITests" */ = {
 			isa = XCConfigurationList;
@@ -526,8 +540,22 @@
 				4820D07A1C93679A0051B283 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		488C88801C93F0CF00126685 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				488C88811C93F0CF00126685 /* Model.xcdatamodel */,
+			);
+			currentVersion = 488C88811C93F0CF00126685 /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 4820D0421C93679A0051B283 /* Project object */;
 }

@@ -9,6 +9,7 @@
 import UIKit
 import MapKit
 import Foundation
+import CoreData
 
 class TravelLocationsMapViewController: UIViewController, MKMapViewDelegate {
 
@@ -17,13 +18,28 @@ class TravelLocationsMapViewController: UIViewController, MKMapViewDelegate {
     
     // Mark: Vairiables
     var startSaving : Bool!
+    var allPins = [Pin]()
+    var sharedContext: NSManagedObjectContext {
+        return CoreDataStackManager.sharedInstance().managedObjectContext
+    }
     
     // Mark: View Functions
     override func viewDidLoad() {
         super.viewDidLoad()
         startSaving = false
-        mapView.delegate = self
         
+        mapView.delegate = self
+        let longPressedGesture = UILongPressGestureRecognizer(target: self, action: "addPin:")
+        mapView.addGestureRecognizer(longPressedGesture)
+        
+        allPins = fetchAllPins()
+        for pin in allPins {
+            let annotation = MKPointAnnotation()
+            annotation.coordinate.latitude = pin.latitude
+            annotation.coordinate.longitude = pin.longitude
+            annotation.title = "\(pin.latitude),\(pin.longitude)"
+            self.mapView.addAnnotation(annotation)
+        }
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -38,6 +54,37 @@ class TravelLocationsMapViewController: UIViewController, MKMapViewDelegate {
         saveLastlocation(mapView.region.center, lastZoom: mapView.region.span)
     }
     
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+        let reuseId = "pin"
+        var pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId) as? MKPinAnnotationView
+        if pinView == nil {
+            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+            pinView!.canShowCallout = true
+            pinView!.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure)
+        }
+        else {
+            pinView!.annotation = annotation
+        }
+
+        return pinView
+    }
+    
+    func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        print(view.annotation?.coordinate)
+    }
+    
+    // Core Data Functions
+    func fetchAllPins() -> [Pin] {
+        let fetchRequest = NSFetchRequest(entityName: "Pin")
+        do {
+            return try sharedContext.executeFetchRequest(fetchRequest) as! [Pin]
+        } catch  let error as NSError {
+            print("Error in fetchAllActors(): \(error)")
+            return [Pin]()
+        }
+    }
+    
+    // Mark : Helping Functions
     func saveLastlocation(lastLocation : CLLocationCoordinate2D, lastZoom : MKCoordinateSpan){
         if startSaving! {
             NSUserDefaults.standardUserDefaults().setObject(lastLocation.latitude, forKey: Constants.Defaults.Latitude)
@@ -58,6 +105,20 @@ class TravelLocationsMapViewController: UIViewController, MKMapViewDelegate {
         let region = MKCoordinateRegionMake(CLLocationCoordinate2D(latitude: lat!, longitude: long!), MKCoordinateSpanMake(latDelta!, longDelta!))
         mapView.setRegion(region, animated: false)
         startSaving = true
+    }
+    
+    @IBAction func addPin(gestureRecognizer : UIGestureRecognizer){
+        let pointOnMap = gestureRecognizer.locationInView(mapView)
+        let cordinate = self.mapView.convertPoint(pointOnMap, toCoordinateFromView: self.mapView)
+        
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = cordinate
+        annotation.title = "\(cordinate.latitude),\(cordinate.longitude)"
+        self.mapView.addAnnotation(annotation)
+        
+        let newPin = Pin(lat: annotation.coordinate.latitude, long: annotation.coordinate.longitude, context: self.sharedContext)
+        self.allPins.append(newPin)
+        CoreDataStackManager.sharedInstance().saveContext()
     }
     
     
