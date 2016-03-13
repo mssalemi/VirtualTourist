@@ -15,9 +15,11 @@ class TravelLocationsMapViewController: UIViewController, MKMapViewDelegate {
 
     // Mark: UI Elements
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     // Mark: Vairiables
     var startSaving : Bool!
+    var firstTimeOpening : Bool!
     var allPins = [Pin]()
     var sharedContext: NSManagedObjectContext {
         return CoreDataStackManager.sharedInstance().managedObjectContext
@@ -27,6 +29,12 @@ class TravelLocationsMapViewController: UIViewController, MKMapViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         startSaving = false
+        
+        if NSUserDefaults.standardUserDefaults().objectForKey(Constants.Defaults.Latitude) == nil {
+            firstTimeOpening = true
+        } else {
+            firstTimeOpening = false
+        }
         
         mapView.delegate = self
         let longPressedGesture = UILongPressGestureRecognizer(target: self, action: "addPin:")
@@ -44,9 +52,13 @@ class TravelLocationsMapViewController: UIViewController, MKMapViewDelegate {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
-        dispatch_async(dispatch_get_main_queue(), { () -> Void in
-            self.goToLastLocation()
-        })
+        if firstTimeOpening == false {
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                self.goToLastLocation()
+            })
+        } else {
+            startSaving = true
+        }
     }
     
     // Mark: Map View Functions
@@ -71,6 +83,22 @@ class TravelLocationsMapViewController: UIViewController, MKMapViewDelegate {
     
     func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         print(view.annotation?.coordinate)
+        
+        activityIndicator.startAnimating()
+        
+        func completionHandler(photoArray : [Photo], cordinates : CLLocationCoordinate2D, page : Int) {
+            let controller = self.storyboard!.instantiateViewControllerWithIdentifier("PhotosViewController") as! PhotosViewController
+            controller.photos = photoArray
+            controller.cordinates = cordinates
+            controller.pages = page
+            self.navigationController!.pushViewController(controller, animated: true)
+            self.activityIndicator.stopAnimating()
+        }
+        
+        let lat = (view.annotation?.coordinate.latitude)! as Double
+        let long = (view.annotation?.coordinate.longitude)! as Double
+        
+        FlickrClient.sharedClient().getPhotos(lat, long: long, handler: completionHandler, random: false, pages: 1)
     }
     
     // Core Data Functions
@@ -120,7 +148,7 @@ class TravelLocationsMapViewController: UIViewController, MKMapViewDelegate {
         self.allPins.append(newPin)
         CoreDataStackManager.sharedInstance().saveContext()
     }
-    
-    
+
 }
+
 
