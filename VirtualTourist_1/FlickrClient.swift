@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import MapKit
+import CoreData
 
 
 class FlickrClient : NSObject {
@@ -18,6 +19,10 @@ class FlickrClient : NSObject {
     
     class func sharedClient() -> FlickrClient {
         return sharedInstance
+    }
+    
+    var sharedContext: NSManagedObjectContext {
+        return CoreDataStackManager.sharedInstance().managedObjectContext
     }
     
     override init(){
@@ -64,10 +69,13 @@ class FlickrClient : NSObject {
             
             print("Going Through Dictionary getting the items we need")
             for photo in photoArray {
-                var newPhoto = Photo()
-                newPhoto.titlee = photo["title"] as! String
+                let title = photo["title"] as! String
+                // TODO : Set File Path ?!?
+                let newPhoto = Photo(title: title, filePath: "FilePath", context: self.sharedContext)
+                // TODO : Set the Image a different way !
                 newPhoto.image = UIImage(data: NSData(contentsOfURL: NSURL(string: photo["url_m"] as! String)!)!)
                 photos.append(newPhoto)
+                CoreDataStackManager.sharedInstance().saveContext()
             }
             
             dispatch_async(dispatch_get_main_queue()) {

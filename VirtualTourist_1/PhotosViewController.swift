@@ -31,11 +31,6 @@ class PhotosViewController: UIViewController, UICollectionViewDataSource, UIColl
         collectionView.reloadData()
         self.mapView.delegate = self
         self.mapView.setCenterCoordinate(cordinates, animated: true)
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: "dismiss:")
-    }
-    
-    @IBAction func dismiss(sender:AnyObject){
-        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     override func viewDidAppear(animated: Bool) {

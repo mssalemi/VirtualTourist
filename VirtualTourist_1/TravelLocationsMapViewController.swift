@@ -97,7 +97,6 @@ class TravelLocationsMapViewController: UIViewController, MKMapViewDelegate {
         
         let lat = (view.annotation?.coordinate.latitude)! as Double
         let long = (view.annotation?.coordinate.longitude)! as Double
-        
         FlickrClient.sharedClient().getPhotos(lat, long: long, handler: completionHandler, random: false, pages: 1)
     }
     

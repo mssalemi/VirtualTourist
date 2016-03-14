@@ -14,7 +14,6 @@ class Photo : NSManagedObject {
     @NSManaged var title : String!
     @NSManaged var imagePath : String!
     var image : UIImage!
-    var titlee : String!
     
     // Mark : Core Data Init
     override init(entity: NSEntityDescription, insertIntoManagedObjectContext context: NSManagedObjectContext?) {

@@ -37,7 +37,7 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="QwO-q1-6AS">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             </mapView>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="gfE-bR-Ia5">
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="gfE-bR-Ia5">
                                 <rect key="frame" x="7" y="72" width="20" height="20"/>
                             </activityIndicatorView>
                         </subviews>
@@ -49,7 +49,9 @@
                             <constraint firstAttribute="trailingMargin" secondItem="QwO-q1-6AS" secondAttribute="trailing" constant="-20" id="sOL-O8-ZPg"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="v4O-fa-nHe"/>
+                    <navigationItem key="navigationItem" id="v4O-fa-nHe">
+                        <barButtonItem key="backBarButtonItem" title="Ok" id="DIO-Nq-32Q"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="activityIndicator" destination="gfE-bR-Ia5" id="ZfS-p9-AdL"/>
                         <outlet property="mapView" destination="QwO-q1-6AS" id="WZM-g8-tvC"/>
