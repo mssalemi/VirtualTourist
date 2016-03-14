@@ -69,9 +69,9 @@ class FlickrClient : NSObject {
             
             print("Going Through Dictionary getting the items we need")
             for photo in photoArray {
-                let title = photo["title"] as! String
-                // TODO : Set File Path ?!?
-                let newPhoto = Photo(title: title, filePath: "FilePath", context: self.sharedContext)
+                let title = photo["id"] as! String
+                let filePath = photo["url_m"] as! String
+                let newPhoto = Photo(title: title, filePath: filePath, context: self.sharedContext)
                 // TODO : Set the Image a different way !
                 newPhoto.image = UIImage(data: NSData(contentsOfURL: NSURL(string: photo["url_m"] as! String)!)!)
                 photos.append(newPhoto)
