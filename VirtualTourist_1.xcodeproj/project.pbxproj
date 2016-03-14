@@ -19,6 +19,7 @@
 		4820D06E1C93679A0051B283 /* VirtualTourist_1UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4820D06D1C93679A0051B283 /* VirtualTourist_1UITests.swift */; };
 		4820D07F1C936FEC0051B283 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4820D07E1C936FEC0051B283 /* Constants.swift */; };
 		4840F8EC1C9533A800B1F33E /* FlickrClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4840F8EB1C9533A800B1F33E /* FlickrClient.swift */; };
+		4840F96E1C97572400B1F33E /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4840F96D1C97572400B1F33E /* ImageCache.swift */; };
 		488C887D1C93EEBD00126685 /* CoreDataStackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488C887C1C93EEBD00126685 /* CoreDataStackManager.swift */; };
 		488C887F1C93EF2B00126685 /* Pin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488C887E1C93EF2B00126685 /* Pin.swift */; };
 		488C88821C93F0CF00126685 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 488C88801C93F0CF00126685 /* Model.xcdatamodeld */; };
@@ -60,6 +61,7 @@
 		4820D06F1C93679A0051B283 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4820D07E1C936FEC0051B283 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		4840F8EB1C9533A800B1F33E /* FlickrClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlickrClient.swift; sourceTree = "<group>"; };
+		4840F96D1C97572400B1F33E /* ImageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		488C887C1C93EEBD00126685 /* CoreDataStackManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStackManager.swift; sourceTree = "<group>"; };
 		488C887E1C93EF2B00126685 /* Pin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pin.swift; sourceTree = "<group>"; };
 		488C88811C93F0CF00126685 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 			children = (
 				4820D0511C93679A0051B283 /* Main.storyboard */,
 				4820D0561C93679A0051B283 /* LaunchScreen.storyboard */,
+				4840F96D1C97572400B1F33E /* ImageCache.swift */,
 				4820D07D1C9367D50051B283 /* Other */,
 				4820D07C1C9367B80051B283 /* View */,
 				4820D07B1C9367B10051B283 /* Model */,
@@ -304,6 +307,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4840F96E1C97572400B1F33E /* ImageCache.swift in Sources */,
 				481B0C841C9504B000A31CD6 /* Photo.swift in Sources */,
 				4840F8EC1C9533A800B1F33E /* FlickrClient.swift in Sources */,
 				488C887F1C93EF2B00126685 /* Pin.swift in Sources */,

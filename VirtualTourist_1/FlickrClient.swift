@@ -71,9 +71,15 @@ class FlickrClient : NSObject {
             for photo in photoArray {
                 let title = photo["id"] as! String
                 let filePath = photo["url_m"] as! String
+                
+                let imageData = UIImageJPEGRepresentation(UIImage(data: NSData(contentsOfURL: NSURL(string: filePath)!)!)!, 1)
+                NSUserDefaults.standardUserDefaults().setObject(imageData, forKey: title)
+                
                 let newPhoto = Photo(title: title, filePath: filePath, context: self.sharedContext)
                 // TODO : Set the Image a different way !
-                newPhoto.image = UIImage(data: NSData(contentsOfURL: NSURL(string: photo["url_m"] as! String)!)!)
+                //NSUserDefaults.standardUserDefaults().setObject(<#T##value: AnyObject?##AnyObject?#>, forKey: <#T##String#>)
+                //newPhoto.image = UIImage(data: NSData(contentsOfURL: NSURL(string: filePath)!)!)
+                
                 photos.append(newPhoto)
                 CoreDataStackManager.sharedInstance().saveContext()
             }
@@ -84,6 +90,10 @@ class FlickrClient : NSObject {
             }
         }
         task.resume()
+    }
+
+    private func saveImage(){
+        
     }
     
     private func createURL(long: Double, lat: Double, random:Bool, numOfPages : Int) -> String{

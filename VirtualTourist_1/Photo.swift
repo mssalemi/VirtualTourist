@@ -26,8 +26,17 @@ class Photo : NSManagedObject {
         super.init(entity: entity, insertIntoManagedObjectContext: context)
         self.title = title
         self.imagePath = filePath
+        getImage()
     }
     
-    
+    func getImage(){
+        var imageData : NSData!
+        if let imageData = NSUserDefaults.standardUserDefaults().objectForKey(title) as? NSData {
+                    self.image = UIImage(data: imageData)
+        } else {
+            print("Couldn't save image.")
+        }
+        print("Attempt to set image complete")
+    }
     
 }
